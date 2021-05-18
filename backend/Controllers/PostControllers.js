@@ -9,6 +9,9 @@ exports.getPosts = async (req, res) => {
     const posts = await Posts.find();
     res.json(posts)
 }
+exports.getCreate = async (req, res) => {
+  res.render('create')
+}
 exports.createPost = async (req, res) => {
   // we use mongodb's save functionality here
   await new Posts(req.body).save((err, data) => {
@@ -20,10 +23,8 @@ exports.createPost = async (req, res) => {
       });
     } else {
       // if success send the following response
-      res.status(200).json({
-        message: "Post Created",
-        data,
-      });
+      res.json({'msg' : 'post created successfully~!'})
+      res.redirect('/getPosts')
     }
   });
 };
