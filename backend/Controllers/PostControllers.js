@@ -31,29 +31,22 @@ exports.createPost = async (req, res) => {
   });
 };
 exports.singlePosts = async (req, res) => {
-    await Posts.find({_id : req.params.id} , (err , data) => {
-       if(err) res.json({'msg' : 'no data found'})
-       else{
-         res.render('singlepost' , {value : data})
-       }
-    }).lean()
+    const posts = await Posts.find({_id : req.params.id}).lean()
+    
+}
+exports.getUpdate = async (req, res) => {
+  const posts = await Posts.find({_id : req.params.id}).lean();
+  res.render('update' , {data : posts});
 }
 exports.updatePost = async (req, res) => {
   // get a postID.
-  let postID = req.params.id;
+  
   console.log(req.body)
   // we will use findByIdAndUpdate function : findByIdAndUpdate(id, data, callback)
-  await Posts.findByIdAndUpdate({_id: postID},{$set : req.body}, {new : true},(err, data) => {
-    if (err) {
-      res.status(500).json({
-        message:
-          "Something went wrong, please try again later.",
-      });
-    } else {
-      res.status(200).json({
-        message: "Post Updated again",
-         data,
-      });
+  await Posts.findOneAndUpdate({_id: req.params.id}, {$set: req.body} ,{new : true},(err, data) => {
+    if (err) console.log(req.body)
+    else {
+      res.redirect('/getPosts')
     }
   });
 }

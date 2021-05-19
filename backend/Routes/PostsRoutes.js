@@ -10,6 +10,7 @@ router.get('/getCreate' , postController.getCreate)
 router.get('/getDelete/:id' , postController.getDelete)
 router.post('/create' , postController.createPost)
 router.get('/getPosts/:id' , postController.singlePosts)
-router.put('/post/:id/update' , postController.updatePost)
+router.get('/post/:id' , postController.getUpdate)
+router.post('/post/:id/update' , postController.updatePost)
 router.delete('/post/:id/delete' , postController.deletePost)
 module.exports = router

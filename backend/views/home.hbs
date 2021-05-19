@@ -12,6 +12,27 @@
 
                 background : #0B0E11;
                 color: #DEE3EA;
+                font-family : "Inter , -apple-system"
+            }
+            nav{
+                display  :flex;
+                flex-direction: row;
+                gap : 80%;
+                margin : 10px;
+            }
+            #new_room{
+                margin-top : 13px;
+                width : 6em;
+                padding : 2px;
+                height : 2em;
+                float  : right;
+                text-align : center;
+                border-radius: 20px;
+                background : #FD4D4D;
+                text-decoration: none;
+                color : #DEE3EA;
+
+                font-family : "Inter , -apple-system"
             }
             .allpost a{
                 text-decoration : none;
@@ -19,10 +40,10 @@
             }
             .allpost{
                 display : grid;
-                grid-template-columns : repeat(3 , 1fr);
+                grid-template-columns : repeat(auto-fill , 1fr);
+                grid-template-rows : repeat(auto-fill , 1fr)
                 gap : 10px;
-                grid-auto-rows: minmax(50px , auto) ;
-                grid-column : auto;
+                row-gap : 20px;
                 grid-row : auto;
                 margin-top : 10px;
                 
@@ -57,12 +78,45 @@
                 margin-top : 2%;
                 
             }
+            .fa-edit:hover{
+                color : #007bff;
+            }
+
+            @media(max-width:1000px){
+                nav{
+                    gap : 70%;
+                }
+                
+            }   
+            @media(max-width:700px){
+                nav{
+                    gap : 60%;
+                }
+                
+            }   
+            @media(max-width:500px){
+                nav{
+                    gap : 40%;
+                }
+                
+            }   
+            @media(max-width:400px){
+                nav{
+                    gap : 30%;
+                }
+                
+            }   
             
     </style>
 
 </head>
 <body>
         <div class="container-fluid">
+            <nav>
+                    <h3>Blogspace</h3>
+                    <div id = "emer"><a href="/getCreate" id = "new_room"><span>new blog</span></a></div>
+                    
+            </nav>
                 <div class="allpost">
                     {{#each data}}
                             <div class="eachpost">
@@ -70,7 +124,7 @@
                             
                             <h1> {{this.title}} </h1>
                             <a class = "fa fa-trash" href="/getDelete/{{this._id}}"></a>
-                            <a class="fa fa-edit" ></a>
+                            <a class="fa fa-edit" href = "/post/{{this._id}}"></a>
                             <p>Author : {{this.author}}</p>
                             <p>{{this.description}}</p>
                             </a>
@@ -78,6 +132,7 @@
                     {{/each}}
 
                 </div>
+
            
         </div>
         <script src="/frontend/js/index.js"></script>

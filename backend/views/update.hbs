@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <title>Create a Post</title>
+    <style>
+        body {
+            
+                background : #0B0E11;
+                color: #DEE3EA;
+        }
+        #header{
+            
+                color : #FD4D4D;
+        }
+       
+    </style>
+</head>
+<body>
+        <div class="container-fluid">
+            {{#each data}}
+            <form action = "/post/{{this._id}}/update" method = "POST" style="display :flex; flex-direction : column">
+            <h1 id = "header">Update Blog Post</h1>
+            <hr>
+            <label for="input_1">Author Name</label>
+            <input type="text" name = "author"  value = "{{this.author}}" class="input-field" id = "input_1">
+            <label for="input_2">Title Name</label>
+            <input type="text" name = "title"  value = "{{this.title}}" class="input-field" id = "input_2">
+            <label for="input_3">Description </label>    
+            
+            <input type="text" name ="description" value = "{{this.description}}" class="input-field" id = "input_3">
+            
+            <input type = "submit"  class="btn btn-danger mt-4" >
+            </form>
+            {{/each}}
+        </div>  
+    
+</body>
+</html>
