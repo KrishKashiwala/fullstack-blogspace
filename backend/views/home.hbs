@@ -4,9 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <title>Home Page</title>
+    <style>
+            body {
+
+                background : #0B0E11;
+                color: #DEE3EA;
+            }
+            .allpost a{
+                text-decoration : none;
+                color : #DEE3EA; 
+            }
+            .allpost{
+                display : grid;
+                grid-template-columns : repeat(3 , 10fr);
+                gap : 10px;
+                grid-auto-rows: minmax(50px , auto) ;
+                grid-column : auto;
+                grid-row : auto;
+                margin-top : 10px;
+                
+            }
+            .eachpost{
+                background : #151A21;
+                border-radius : 30px;
+                padding : 5px;
+                cursor : pointer;
+            }
+            .eachpost h1{
+                color : #FD4D4D;
+            }
+           
+            .fa-trash{
+                float : right;
+                padding : 4px;
+                font-size : 25px;
+                margin-right : 2%;
+                margin-top : 2%;
+                
+            }
+            .fa-edit{
+                color : #007bff;
+                float : right;
+                padding : 4px;
+                font-size : 25px;
+                margin-right : 2%;
+                margin-top : 2%;
+                
+            }
+            
+    </style>
+
 </head>
 <body>
-    Hello this is little bit of confusing
+        <div class="container-fluid">
+                <div class="allpost">
+                    {{#each data}}
+                            <a href="/getPosts/{{this._id}}">
+                            <div class="eachpost">
+                            
+                            <h1> {{this.title}} <i class = "fa fa-trash"></i> <i class = "fa fa-edit"></i></h1>
+                            <p>Author : {{this.author}}</p>
+                            <p>{{this.description}}</p>
+                            </div>
+                            </a>
+                    {{/each}}
+
+                </div>
+           
+        </div>
 </body>
 </html>

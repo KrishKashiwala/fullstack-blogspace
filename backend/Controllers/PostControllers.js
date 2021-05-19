@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 mongoose.set('useFindAndModify', false);
-// import and initiate the posts model to query the database
 const Posts = mongoose.model("posts");
 exports.baseRoute = async (req,  res) => {
-    res.render('homepage')
-}
-exports.getPosts = async (req, res) => {
     const posts = await Posts.find();
     res.json(posts)
+}
+exports.getPosts = async (req, res) => {
+    const posts = await Posts.find({}).lean();
+    res.render('home' , {data : posts});
 }
 exports.getCreate = async (req, res) => {
   res.render('create')
@@ -17,28 +17,26 @@ exports.createPost = async (req, res) => {
   await new Posts(req.body).save((err, data) => {
     if (err) {
       // if there is an error send the following response
+      console.log(data)
       res.status(500).json({
         message:
           "Something went wrong, please try again later.",
       });
     } else {
       // if success send the following response
-      res.json({'msg' : 'post created successfully~!'})
-      res.redirect('/getPosts')
+      console.log(data)
+     res.redirect('/getPosts')
+  
     }
   });
 };
 exports.singlePosts = async (req, res) => {
     await Posts.find({_id : req.params.id} , (err , data) => {
-        if(err)         {
-            res.status(400).json({'msg' : 'something went wrong'})
-        }
-        else {
-            console.log(data);
-            res.status(200).json(data)
-            
-        }
-    })
+       if(err) res.json({'msg' : 'no data found'})
+       else{
+         res.render('singlepost' , {value : data})
+       }
+    }).lean()
 }
 exports.updatePost = async (req, res) => {
   // get a postID.

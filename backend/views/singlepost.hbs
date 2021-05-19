@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <title>Home Page</title>
+    <style>
+            body {
+
+                background : #0B0E11;
+                color: #DEE3EA;
+            }
+         
+            .singlepost{
+                display : grid;
+                
+                gap : 30px;
+                grid-auto-rows: minmax(50px , auto) ;
+                grid-column : auto;
+                grid-row : auto;
+                margin-top : 10px;
+                
+            }
+            .post_data{
+                background : #151A21;
+                border-radius : 30px;
+                padding : 5px;
+              
+            }
+            .post_data h1{
+                color : #FD4D4D;
+            }
+
+           
+            
+    </style>
+
+</head>
+<body>
+        <div class="container-fluid">
+                <div class="singlepost">
+                    {{#each value}}
+                            
+                            <div class="post_data">
+                                <h1>{{this.title}}</h1>
+                                <p>{{this.description}}</p>
+                            </div>
+                            
+                    {{/each}}
+
+                </div>
+           
+        </div>
+</body>
+</html>

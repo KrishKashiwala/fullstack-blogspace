@@ -1,10 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const posts = mongoose.model('posts')
+const Posts = mongoose.model('posts')
 const postController =  require('../Controllers/PostControllers')
 const router = express.Router()
-router.use(express.urlencoded({extended: false}))
-router.use(express.json())
+
 router.get('/' , postController.baseRoute)
 router.get('/getPosts' , postController.getPosts)
 router.get('/getCreate' , postController.getCreate)
