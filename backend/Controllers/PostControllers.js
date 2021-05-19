@@ -57,11 +57,18 @@ exports.updatePost = async (req, res) => {
     }
   });
 }
+exports.getDelete = async (req , res) => {
+    await Posts.deleteOne({_id : req.params.id} , (err , data) => {
+        res.redirect('/getPosts')
+    })
+    
+}
 exports.deletePost = async (req, res) => {
-  await Posts.deleteOne({_id : req.params.id} , (err , data) => {
+  await Posts.findOneAndDelete({_id : req.params.id} , (err , data) => {
         if(err) res.json({'msg' : 'data not found'})
         else{
-          res.redirect('/getPosts')
+          res.json(data)
         }
+
   })
 }
