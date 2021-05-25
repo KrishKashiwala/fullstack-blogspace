@@ -6,15 +6,15 @@ exports.baseRoute = async (req,  res) => {
     res.json(posts)
 }
 exports.getPosts = async (req, res) => {
-    const posts = await Posts.find({}).lean();
+    const posts = await Posts.find({}).sort({title : 1}).lean();
     res.render('home' , {data : posts});
 }
 exports.getCreate = async (req, res) => {
   res.render('create')
 }
-exports.createPost = async (req, res) => {
+exports.createPost =  (req, res) => {
   // we use mongodb's save functionality here
-  await new Posts(req.body).save((err, data) => {
+   new Posts(req.body).save((err, data) => {
     if (err) {
       // if there is an error send the following response
       console.log(data)
