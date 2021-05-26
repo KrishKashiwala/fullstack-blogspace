@@ -1,20 +1,11 @@
-import React  , {useState , useEffect} from 'react'
+import React  , {useState } from 'react'
 import Cards from './Cards'
 function App() {
   const [apidata, setApiData]  = useState([{}])
-
-    useEffect(() => {
-        fetch('http://localhost:5000/').then(y => y.json()).then(data => setApiData(data))
-    }, [])
-    
-  
-   
-  
-  
   return (
     
     <div>
-         <Cards data = {apidata}/>
+         <Cards data = {apidata}  setData = {setApiData}/>
           
     </div>
   );
