@@ -7,7 +7,7 @@ exports.baseRoute = async (req,  res) => {
 }
 exports.getPosts = async (req, res) => {
     const posts = await Posts.find({}).sort({title : 1}).lean();
-    res.render('home' , {data : posts});
+    res.json(posts)
 }
 exports.getCreate = async (req, res) => {
   res.render('create')

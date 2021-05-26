@@ -1,6 +1,6 @@
 import React , {useEffect} from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
+
 
 import './App.css'
 
@@ -65,6 +65,7 @@ const Cards = ({data , setData}) => {
     useEffect(() => {
       getRequest();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     } , [])
     
     const getRequest = () => {
@@ -77,7 +78,7 @@ const Cards = ({data , setData}) => {
     <AllCards>
       
           {
-          data.length < 0 ? '.. loading' : data.map(datas => (
+          data.length <= 0  ? '.. loading' : data.map(datas => (
               <Temp>
               <Combine>              
               <Title key = {datas._id}>{datas.title}</Title>
