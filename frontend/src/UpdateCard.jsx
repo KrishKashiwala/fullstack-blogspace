@@ -9,6 +9,7 @@ const UpdateCard = ({ match }) => {
     let [text, setText] = useState(() => {
         console.log('again')
         fetch(`http://localhost:5000/getPosts/${match.params.id}`).then(data => data.json()).then(res => res.map(data => setText(data.title)))
+        
     })
     let [author, setAuthor] = useState(
 
