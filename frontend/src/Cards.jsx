@@ -1,8 +1,7 @@
-import React , {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-
-
 import './App.css'
+import { Link } from 'react-router-dom'
 
 const AllCards = styled.div`
       background-color: #0B0E11;
@@ -42,7 +41,7 @@ const Del = styled.a`
   color : #FD4233;
 }
 `
-const Edit  = styled.i`
+const Edit = styled.i`
 float : right;
 cursor : pointer;
 color : #DEE3EA;
@@ -59,43 +58,65 @@ flex-direction : row;
 flex-basis : 100%;
 `
 
+const Header = styled.header`
+position : relative;
+margin : 10px;
+display : flex; 
+gap : 80%;
+`
+const NewBlog = styled.button`
+color  : #DEE3EA;
+background :#FD4233; 
+border-radius : 60px;
+padding : 0 20px;
+
+`
 
 
-const Cards = ({data , setData}) => {
-    useEffect(() => {
-      getRequest();
+const Cards = () => {
+  const [data, setData] = useState([{}])
+  useEffect(() => {
+    getRequest();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    } , [])
-    
-    const getRequest = () => {
-        fetch('http://localhost:5000/').then(y => y.json()).then(data => setData(data))
-    }
+  }, [])
 
-    console.log(data)
+  const getRequest = async () => {
+    await fetch('http://localhost:5000/').then(y => y.json()).then(data => setData(data))
+  }
+
+  console.log(data)
   return (
-    
-    <AllCards>
-      
-          {
-          data.length <= 0  ? '.. loading' : data.map(datas => (
-              <Temp>
-              <Combine>              
-              <Title key = {datas._id}>{datas.title}</Title>
-              
-              <Edit className = "fa fa-edit"></Edit>
-              <Del className = "fa fa-trash" href = {`http://localhost:5000/getDelete/${datas._id}`}></Del>
-              
+    <>
+      <Header>
+        <h1>Blogspace</h1>
+        <Link to='/create'>
+          <NewBlog>New blog</NewBlog>
+        </Link>
+
+      </Header>
+      <AllCards>
+
+        {
+          data.length <= 0 ? '.. loading' : data.map(datas => (
+            <Temp>
+              <Combine>
+                <Title key={datas._id}>{datas.title}</Title>
+
+                <Edit className="fa fa-edit"></Edit>
+                <Del className="fa fa-trash" href={`http://localhost:5000/getDelete/${datas._id}`}></Del>
+
               </Combine>
-              <p key = {datas._id}>{datas.author} </p>
-              
-              <p key = {datas._id}>{datas.description}</p>
+              <p key={datas._id}>{datas.author} </p>
+
+              <p key={datas._id}>{datas.description}</p>
               <p>{datas._id}</p>
-              </Temp>
+            </Temp>
           ))
-          }
-          
+        }
+
       </AllCards>
+    </>
   )
 }
 

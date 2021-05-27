@@ -1,42 +1,26 @@
-import React  , {useState } from 'react'
-import Cards from './Cards'
-import styled from 'styled-components'
-import {BrowserRouter , Link, Route} from 'react-router-dom'
-import CreateCard from './CreateCard'
+import React from 'react'
 import './App.css'
-
-const Header = styled.header`
-position : relative;
-margin : 10px;
-display : flex; 
-gap : 80%;
-`
-const NewBlog = styled.button`
-color  : #DEE3EA;
-background :#FD4233; 
-border-radius : 60px;
-padding : 0 20px;
-
-`
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Temp from './Temp'
+import Routes from './Routes'
+import Cards from './Cards'
+import CreateCard from './CreateCard'
 function App() {
-  const [apidata, setApiData]  = useState([{}])
   return (
-    <BrowserRouter>   
     <div>
-    
-    <Header>         
-         <h1>Blogspace</h1>
-          <Route path = '/create' exact component = {CreateCard}></Route>
-          <Route path = '/' exact commponent = {App}></Route>
-         <Link to = '/create'>
-        <NewBlog>New blog</NewBlog>
-        </Link>
-    </Header>
 
-         <Cards data = {apidata}  setData = {setApiData}/>
-          
+      <Router>
+
+        <Route exact path='/' component={Cards} />
+        <Route exact path='/create' component={CreateCard} />
+        <Route exact path='/blog' component={Temp} />
+        <Route exact path='/routes' component={Routes} />
+
+
+      </Router>
+
+
     </div>
-    </BrowserRouter>
 
   );
 }
