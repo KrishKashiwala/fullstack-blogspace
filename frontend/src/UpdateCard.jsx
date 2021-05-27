@@ -9,7 +9,7 @@ const UpdateCard = ({ match }) => {
     let [text, setText] = useState(() => {
         console.log('again')
         fetch(`http://localhost:5000/getPosts/${match.params.id}`).then(data => data.json()).then(res => res.map(data => setText(data.title)))
-        
+
     })
     let [author, setAuthor] = useState(
 
@@ -31,7 +31,7 @@ const UpdateCard = ({ match }) => {
                 <label htmlFor="author"  >Author Name</label>
                 <input className="form-control" type="text" id="author" value={author} name="author" onChange={(e) => setAuthor(e.target.value)} />
                 <label htmlFor="description">Description</label>
-                <textarea className="form-control" type="text" id="description" value={des} name="description" onChange={(e) => setDes(e.target.value)} />
+                <textarea className="form-control input-sm" type="text" id="description" rows="4" cols="50" value={des} name="description" onChange={(e) => setDes(e.target.value)} />
                 <button type="Submit" className="btn btn-danger">Submit</button>
             </form>
 

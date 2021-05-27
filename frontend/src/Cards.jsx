@@ -27,7 +27,7 @@ color : #FD4233;
 background-size : cover;
 width : 70%;
 margin-right : 40px;
-
+font-family: 'Roboto', sans-serif;
 margin-right : 300px;
 `
 const Del = styled.a`
@@ -36,7 +36,7 @@ const Del = styled.a`
   float :right;
   cursor : pointer;
   color : #DEE3EA;
-  font-size : 40px;
+  font-size : 20px;
 &:hover{
   color : #FD4233;
 }
@@ -45,7 +45,7 @@ const Edit = styled.i`
 float : right;
 cursor : pointer;
 color : #DEE3EA;
-font-size : 40px;
+font-size : 20px;
 margin-right : 30px;
 margin-top : 10px;
 &:hover{
@@ -56,6 +56,7 @@ const Combine = styled.div`
 display : flex;
 flex-direction : row;
 flex-basis : 100%;
+margin-bottom : 20px;
 `
 
 const Header = styled.header`
@@ -75,7 +76,16 @@ margin-right: 20px;
 height : 50px;
 
 `
+const Des = styled.p`
+font-family: 'Montserrat', sans-serif;
 
+`
+const Name = styled.h1`
+font-family: 'Dancing Script', cursive;
+`
+const Author = styled.p`
+font-family: 'Lobster', cursive;
+`
 
 const Cards = () => {
   const [data, setData] = useState([{}])
@@ -93,7 +103,7 @@ const Cards = () => {
   return (
     <>
       <Header>
-        <h1>Blogspace</h1>
+        <Name>Blogspace</Name>
         <Link to='/create'>
           <NewBlog>New blog</NewBlog>
         </Link>
@@ -112,9 +122,9 @@ const Cards = () => {
                 <Del className="fa fa-trash" href={`http://localhost:5000/getDelete/${datas._id}`}></Del>
 
               </Combine>
-              <p key={datas._id}>{datas.author} </p>
 
-              <p key={datas._id}>{datas.description}</p>
+              <Des key={datas._id}>{datas.description}</Des>
+              <Author key={datas._id}>{`- ${datas.author}`} </Author>
               <p>{datas._id}</p>
             </Temp>
           ))
