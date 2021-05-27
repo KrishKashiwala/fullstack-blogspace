@@ -62,13 +62,17 @@ const Header = styled.header`
 position : relative;
 margin : 10px;
 display : flex; 
-gap : 80%;
+gap : 73%;
+margin-top : 20px;
+margin-left : 30px;
 `
 const NewBlog = styled.button`
 color  : #DEE3EA;
 background :#FD4233; 
 border-radius : 60px;
 padding : 0 20px;
+margin-right: 20px;
+height : 50px;
 
 `
 
@@ -102,8 +106,9 @@ const Cards = () => {
             <Temp>
               <Combine>
                 <Title key={datas._id}>{datas.title}</Title>
-
-                <Edit className="fa fa-edit"></Edit>
+                <Link to={`/update/${datas._id}`}>
+                  <Edit className="fa fa-edit"></Edit>
+                </Link>
                 <Del className="fa fa-trash" href={`http://localhost:5000/getDelete/${datas._id}`}></Del>
 
               </Combine>

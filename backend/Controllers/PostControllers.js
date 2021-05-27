@@ -33,6 +33,7 @@ exports.createPost = (req, res) => {
 };
 exports.singlePosts = async (req, res) => {
   const posts = await Posts.find({ _id: req.params.id }).lean()
+  res.json(posts)
 
 }
 exports.getUpdate = async (req, res) => {
@@ -47,13 +48,19 @@ exports.updatePost = async (req, res) => {
   await Posts.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true }, (err, data) => {
     if (err) console.log(req.body)
     else {
-      res.redirect('/getPosts')
+      res.redirect('http://localhost:3000')
     }
   });
 }
 exports.getDelete = async (req, res) => {
   await Posts.deleteOne({ _id: req.params.id }, (err, data) => {
-    res.redirect('/getPosts')
+    if (err) res.json({
+      'msg': 'cannot delete post'
+    })
+    else {
+      console.log(data)
+      res.redirect('http://localhost:3000/')
+    }
   })
 
 }
